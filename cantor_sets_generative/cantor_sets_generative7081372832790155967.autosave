@@ -1,0 +1,21 @@
+ArrayList<CantorElement> cantorList;
+int time = 0;
+void setup(){
+    size(800,600);
+    cantorList = new ArrayList<CantorElement>();
+    stroke(200);
+}
+
+void draw(){
+    background(50);
+
+    if (time == 0){
+        CantorElement element = new CantorElement(10,20,10,20,cantorList);
+    }
+
+    for( CantorElement element : cantorList){
+        element.render();
+    }
+    println(cantorList.get(0));
+    time++;
+}
