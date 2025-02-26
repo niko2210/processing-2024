@@ -1,0 +1,49 @@
+import java.lang.Math.*;
+
+Center center;
+ArrayList<Center> list;
+void setup(){
+  size(800,800);
+  //fullScreen();
+  list = new ArrayList<Center>();
+  center = new Center(200,200,200);
+  list.add(center);
+  noFill();
+  frameRate(10000);
+}
+
+void draw(){
+  background(0);
+  
+  for(Center center : list){ center.render();}
+  
+  println( center.contains(mouseX,mouseY));
+  
+  int x = (int) (Math.random()*width);
+  int y = (int) (Math.random()*height);
+
+  addCenter();
+}
+
+float canvasDist(int x, int y){
+  int[] arr = {x, y, width-x , height - y};
+  return (float) (min(arr));
+}
+
+void addCenter(){
+  int x = (int)  (random(width));
+  int y = (int)  (random(height));
+
+  float d = canvasDist(x,y);
+
+  for(Center center : list){
+    if(center.distance(x,y)<d) { d= center.distance(x,y);}
+  }
+  int dInt = (int) d;
+
+  if( d>0 ) { list.add( new Center(x,y,2*dInt));}
+  if( d<=0) {addCenter();}
+
+
+
+}
